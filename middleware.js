@@ -2,11 +2,12 @@ const KJUR = require("jsrsasign");
 require("dotenv").config();
 
 const middleware = {
-  generateToken: function (req, req, next) {
+  generateToken: function (req, res, next) {
     let signature = "";
     const iat = Math.floor(Date.now() / 1000);
     const exp = iat + 60 * 60; // 1 hour
     const oHeader = { alg: "HS256", typ: "JWT" };
+    console.log(req.body);
 
     const { topic, password, userIdentity, sessionKey, roleType } = req.body;
     const sdkKey = process.env.ZOOM_SDK_KEY;
